@@ -48,26 +48,26 @@ class DkLowLevelCtrl():
         self.actuators = {}
         self.actuators['throttle']  = ServoConvert(id=1)
         self.actuators['steering']  = ServoConvert(id=2, center_value=328, direction=1) #-- positive left
-        rospy.loginfo("> Actuators corrrectly initialized")
+        rospy.loginfo("> Actuators correctly initialized")
 
         self._servo_msg       = ServoArray()
         for i in range(2): self._servo_msg.servos.append(Servo())
 
         #--- Create the servo array publisher
         self.ros_pub_servo_array    = rospy.Publisher("/servos_absolute", ServoArray, queue_size=1)
-        rospy.loginfo("> Publisher corrrectly initialized")
+        rospy.loginfo("> Publisher correctly initialized")
         
         #--- Create a debug publisher for resulting cmd_vel
-        self.ros_pub_debug_command    = rospy.Publisher("/dkcar/debug/cmd_vel", Twist, queue_size=1)
-        rospy.loginfo("> Publisher corrrectly initialized")        
+        self.ros_pub_debug_command  = rospy.Publisher("/dkcar/debug/cmd_vel", Twist, queue_size=1)
+        rospy.loginfo("> Publisher correctly initialized")        
 
         #--- Create the Subscriber to Twist commands
         self.ros_sub_twist          = rospy.Subscriber("/cmd_vel", Twist, self.update_message_from_command)
-        rospy.loginfo("> Subscriber corrrectly initialized")
+        rospy.loginfo("> Subscriber correctly initialized")
         
         #--- Create the Subscriber to obstacle_avoidance commands
         self.ros_sub_twist          = rospy.Subscriber("/dkcar/control/cmd_vel", Twist, self.update_message_from_chase)
-        rospy.loginfo("> Subscriber corrrectly initialized")    
+        rospy.loginfo("> Subscriber correctly initialized")    
 
         self.throttle_cmd       = 0.
         self.throttle_chase     = 1.
